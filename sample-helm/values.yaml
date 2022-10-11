@@ -8,60 +8,26 @@ replicaCount: 1
 ps-admin:
   image:
     tag: 1-0
-  config:
-    ENABLE_SEQUELIZE_LOGGING: *enableSequelizeLogging
-    MONITOR_MEMORY: *monitorMemory
-    NODE_ENV: *nodeEnv
-    host: *host
-
+ 
 ps-auth:
   image:
     tag: 1-0
-  config:
-    ENABLE_TRACING: *enableTracing
-    ENABLE_SEQUELIZE_LOGGING: *enableSequelizeLogging
-    MONITOR_MEMORY: *monitorMemory
-    NODE_ENV: *nodeEnv
-    SERVICE_HOST: *host
 
 ps-sync:
   image:
     tag: 1-0
-  config:
-    ENABLE_SEQUELIZE_LOGGING: *enableSequelizeLogging
-    MONITOR_MEMORY: *monitorMemory
-    NODE_ENV: *nodeEnv
-    host: *host
 
 ps-pricing:
   image:
     tag: 1-0
-  config:
-    ENABLE_SEQUELIZE_LOGGING: *enableSequelizeLogging
-    MONITOR_MEMORY: *monitorMemory
-    NODE_ENV: *nodeEnv
-    MEASURE_PRE_PERFORMANCE: *measurePrePerformance
-    host: *host
 
 ps-catalogue:
   image:
     tag: 1-0
-  config:
-    PRICING_SERVICE_ENDPOINT: *pricingServiceEndpoint
-    ENABLE_SEQUELIZE_LOGGING: *enableSequelizeLogging
-    MONITOR_MEMORY: *monitorMemory
-    NODE_ENV: *nodeEnv
-    host: *host
 
 ps-amqp-proxy:
   image:
     tag: 1-0
-  config:
-    PRICING_SERVICE_ENDPOINT: *pricingServiceEndpoint
-    SYNC_SERVICE_ENDPOINT: *syncServiceEndpoint
-    CATALOGUE_SERVICE_ENDPOINT: *catalogueServiceEndpoint
-    MONITOR_MEMORY: *monitorMemory
-    NODE_ENV: *nodeEnv
 
 databaseMigration:
   restartPolicy: "Never"
