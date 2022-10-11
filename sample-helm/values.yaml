@@ -7,7 +7,7 @@ replicaCount: 1
 
 ps-admin:
   image:
-    tag: 1.0.0-alpha.8
+    tag: 1-0
   config:
     ENABLE_SEQUELIZE_LOGGING: *enableSequelizeLogging
     MONITOR_MEMORY: *monitorMemory
@@ -16,7 +16,7 @@ ps-admin:
 
 ps-auth:
   image:
-    tag: 1.0.0-alpha.5
+    tag: 1-0
   config:
     ENABLE_TRACING: *enableTracing
     ENABLE_SEQUELIZE_LOGGING: *enableSequelizeLogging
@@ -26,7 +26,7 @@ ps-auth:
 
 ps-sync:
   image:
-    tag: 1.0.0-alpha.16
+    tag: 1-0
   config:
     ENABLE_SEQUELIZE_LOGGING: *enableSequelizeLogging
     MONITOR_MEMORY: *monitorMemory
@@ -35,7 +35,7 @@ ps-sync:
 
 ps-pricing:
   image:
-    tag: 1.0.0-alpha.14
+    tag: 1-0
   config:
     ENABLE_SEQUELIZE_LOGGING: *enableSequelizeLogging
     MONITOR_MEMORY: *monitorMemory
@@ -45,7 +45,7 @@ ps-pricing:
 
 ps-catalogue:
   image:
-    tag: 1.0.0-alpha.16
+    tag: 1-0
   config:
     PRICING_SERVICE_ENDPOINT: *pricingServiceEndpoint
     ENABLE_SEQUELIZE_LOGGING: *enableSequelizeLogging
@@ -55,7 +55,7 @@ ps-catalogue:
 
 ps-amqp-proxy:
   image:
-    tag: 1.0.0-alpha.5
+    tag: 1-0
   config:
     PRICING_SERVICE_ENDPOINT: *pricingServiceEndpoint
     SYNC_SERVICE_ENDPOINT: *syncServiceEndpoint
@@ -68,7 +68,7 @@ databaseMigration:
   image:
     repository: cres.cloudsense.com/ps-database-migration
     pullPolicy: IfNotPresent
-    tag: 1.0.0-alpha.12
+    tag: 1-0
   imagePullSecrets:
     - name: cs-private-registry
   configName: ps-root-config
