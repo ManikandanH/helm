@@ -1,25 +1,25 @@
 replicaCount: 1
 ps-admin:
   image:
-    tag: 1-0
+    tag: 1.0.0-alpha.8
 ps-auth:
   image:
-    tag: 1-0
+    tag: 1.0.0-alpha.5
 ps-sync:
   image:
-    tag: 1-0
+    tag: 1.0.0-alpha.16
 ps-pricing:
   image:
-    tag: 1-0
+    tag: 1.0.0-alpha.14
 ps-catalogue:
   image:
-    tag: 1-0
+    tag: 1.0.0-alpha.16
 ps-amqp-proxy:
   image:
-    tag: 1-0
+    tag: 1.0.0-alpha.5
 ps-database-migration:
   image:
-    tag: 1-0
+    tag: 1.0.0-alpha.12
 serviceAccount:
   create: true
   annotations: {}
