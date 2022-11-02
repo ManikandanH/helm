@@ -1,0 +1,18 @@
+dependencies:
+- name: ps-admin
+  repository: file://../ps-admin
+  version: 1.0.0-alpha.1
+- name: ps-amqp-proxy
+  repository: file://../ps-amqp-proxy
+  version: 1.0.0-alpha.1
+- name: ps-catalogue
+  repository: file://../ps-catalogue
+  version: 1.0.0-alpha.1
+- name: ps-pricing
+  repository: file://../ps-pricing
+  version: 1.0.0-alpha.1
+- name: ps-sync
+  repository: file://../ps-sync
+  version: 1.0.0-alpha.1
+digest: sha256:43b2dfa0f914480a8784340a62acdd009c09d0eed2c8b97f39f3a44644d78dcd
+generated: "2022-10-28T10:36:10.256658+05:30"

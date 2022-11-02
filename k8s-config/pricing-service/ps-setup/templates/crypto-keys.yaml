@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: "crypto-keys"
+  labels:
+    {{- include "ps-setup.labels" . | nindent 4 }}
+type: Opaque
+data:
+  CRYPTO_KEY: {{ .Values.cryptoKeys.userTableKey | b64enc | quote }}
+  BAAS_API_CREDENTIALS_KEY: {{ .Values.cryptoKeys.organizationTableKey | b64enc | quote }}

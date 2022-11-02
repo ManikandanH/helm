@@ -1,0 +1,18 @@
+dockerRegistry:
+  name: "cs-private-registry"
+  server: "cres.cloudsense.com"
+  username: ""
+  password: ""
+
+postgresUrl: ''
+
+cloudAmqpUrl: ''
+
+cryptoKeys:
+  userTableKey: ''
+  organizationTableKey: ''
+
+securityServiceParams:
+  appName: ''
+  region: ''
+  privateKey: ''

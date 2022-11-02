@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: "postgres-params"
+  labels:
+    {{- include "ps-setup.labels" . | nindent 4 }}
+type: Opaque
+data:
+  DATABASE_URL: {{ .Values.postgresUrl | b64enc | quote }}

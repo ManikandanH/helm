@@ -1,0 +1,101 @@
+# Default values for ps.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+serviceHost: &host cs-ea-eu-api.cloudsense.com
+ENABLE_TRACING: &enableTracing false
+ENABLE_SEQUELIZE_LOGGING: &enableSequelizeLogging false
+MONITOR_MEMORY: &monitorMemory false
+NODE_ENV: &nodeEnv "production"
+MEASURE_PRE_PERFORMANCE: &measurePrePerformance false
+PRICING_SERVICE_ENDPOINT: &pricingServiceEndpoint "http://ps-pricing.ps-ea.svc.cluster.local"
+SYNC_SERVICE_ENDPOINT: &syncServiceEndpoint "http://ps-sync.ps-ea.svc.cluster.local"
+CATALOGUE_SERVICE_ENDPOINT: &catalogueServiceEndpoint "http://ps-catalogue.ps-ea.svc.cluster.local"
+
+ps-admin:
+  image:
+    tag: 1.0.0-beta.0
+  config:
+    ENABLE_SEQUELIZE_LOGGING: *enableSequelizeLogging
+    MONITOR_MEMORY: *monitorMemory
+    NODE_ENV: *nodeEnv
+    host: *host
+
+ps-sync:
+  image:
+    tag: 1.0.0-beta.3
+  config:
+    ENABLE_SEQUELIZE_LOGGING: *enableSequelizeLogging
+    MONITOR_MEMORY: *monitorMemory
+    NODE_ENV: *nodeEnv
+    host: *host
+
+ps-pricing:
+  image:
+    tag: 1.0.0-beta.0
+  config:
+    ENABLE_SEQUELIZE_LOGGING: *enableSequelizeLogging
+    MONITOR_MEMORY: *monitorMemory
+    NODE_ENV: *nodeEnv
+    MEASURE_PRE_PERFORMANCE: *measurePrePerformance
+    host: *host
+
+ps-catalogue:
+  image:
+    tag: 1.0.0-beta.0
+  config:
+    PRICING_SERVICE_ENDPOINT: *pricingServiceEndpoint
+    ENABLE_SEQUELIZE_LOGGING: *enableSequelizeLogging
+    MONITOR_MEMORY: *monitorMemory
+    NODE_ENV: *nodeEnv
+    host: *host
+
+ps-amqp-proxy:
+  image:
+    tag: 1.0.0-beta.0
+  config:
+    PRICING_SERVICE_ENDPOINT: *pricingServiceEndpoint
+    SYNC_SERVICE_ENDPOINT: *syncServiceEndpoint
+    CATALOGUE_SERVICE_ENDPOINT: *catalogueServiceEndpoint
+    MONITOR_MEMORY: *monitorMemory
+    NODE_ENV: *nodeEnv
+
+ps-database-migration:
+  restartPolicy: "Never"
+  image:
+    repository: cres.cloudsense.com/ps-database-migration
+    pullPolicy: IfNotPresent
+    tag: 1.0.0-beta.0
+  imagePullSecrets:
+    - name: cs-private-registry
+  configName: ps-root-config
+  config:
+    NODE_ENV: *nodeEnv
+  secrets:
+    - name: postgres-params
+      key: DATABASE_URL
+  command: []
+
+fullnameOverride: "ps-root"
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ''
+
+resources:
+  {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi

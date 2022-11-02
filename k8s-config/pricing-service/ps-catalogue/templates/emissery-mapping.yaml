@@ -1,0 +1,10 @@
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name: {{ include "ps-catalogue.fullname" . }}
+spec:
+  prefix: /graphql
+  rewrite: /graphql
+  service: ps-catalogue
+  hostname: {{.Values.config.host}}
+  bypass_auth: {{.Values.config.bypass_auth}}

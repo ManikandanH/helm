@@ -1,0 +1,44 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ps-database-migration-job
+  annotations:
+    "argocd.argoproj.io/hook": PostSync
+    "argocd.argoproj.io/sync-wave": "0"
+spec:
+  template:
+    spec:
+      {{- with .Values.ps-database-migration.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      restartPolicy: {{ .Values.ps-database-migration.restartPolicy }}
+      containers:
+      - image: "{{ .Values.ps-database-migration.image.repository }}:{{ .Values.ps-database-migration.image.tag }}"
+        imagePullPolicy: {{ .Values.ps-database-migration.image.pullPolicy }}
+        name: {{ template "ps.fullname" . }}
+        env:
+          {{- range $key, $val := .Values.ps-database-migration.config }}
+          - name: {{ $key }}
+            valueFrom:
+              configMapKeyRef:
+                name: {{ $.Values.ps-database-migration.configName }}
+                key: {{ $key }}
+          {{- end }}
+          {{- range $val := .Values.ps-database-migration.secrets }}
+          - name: {{ $val.key }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ $val.name }}
+                key: {{ $val.key }}
+          {{- end }}
+        {{- if .Values.ps-database-migration.command }}
+        command: {{ .Values.ps-database-migration.command }}
+        {{- end }}
+        {{- if .Values.args }}
+        args: {{ .Values.args }}
+        {{- end }}
+        {{- with .Values.resources }}
+        resources:
+  {{ toYaml . | indent 10 }}
+  {{- end }}

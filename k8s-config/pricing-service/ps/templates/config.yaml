@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.ps-database-migration.configName }}
+data:
+  {{- range $key, $val := .Values.ps-database-migration.config }}
+    {{ $key }}: {{ $val | quote }}
+    {{- end}}
